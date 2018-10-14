@@ -7,11 +7,11 @@ xserver-xorg-input-synaptics
 openjdk-8-jdk
 gnome-tweak-tool
 ubuntu-restricted-extras
-imwhell
+imwheel
 python-pip
 python-virtualenv
 python3-pip
-build-essentials
+build-essential
 nemo
 p7zip-full
 ruby
