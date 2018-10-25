@@ -1,11 +1,12 @@
+export ZSH=$HOME/.oh-my-zsh
 
-export ZSH=/home/wesley/.oh-my-zsh
 ZSH_THEME="ys"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-
 alias zshconfig="vim ~/.zshrc"
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
+
+if [[ -f ~/.zshrc-$HOST ]]; then
+    source ~/.zshrc-$HOST
+fi
