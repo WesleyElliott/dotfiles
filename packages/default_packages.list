@@ -24,3 +24,7 @@ ifconfig
 google-chrome-stable
 plexmediaserver
 papirus-icon-theme
+libpam-fprintd
+laptop-mode-tools
+vagrant
+fprint_demo
