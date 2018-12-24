@@ -3,7 +3,7 @@
 checkSource() {
     REPO=$1
     FILE=$2
- 
+
     if grep -Fxq "$REPO" "$FILE" ; then
         return 0
     else
@@ -51,7 +51,7 @@ addPlex() {
         curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
         echo "$PLEX_REPO" | sudo tee "$PLEX_SOURCE"
     fi
-    
+
 }
 
 addPapirus() {
@@ -60,11 +60,20 @@ addPapirus() {
     sudo add-apt-repository -y ppa:papirus/papirus
 }
 
+addDocker() {
+  # Setup for docker
+  echo "=== Adding Docker ==="
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic test"
+}
+
 addAll() {
     addChrome
     addAtom
     addPlex
     addPapirus
+    addDocker
 }
 
 if [ -z $1 ]; then
