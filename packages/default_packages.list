@@ -3,6 +3,8 @@ xclip
 git
 vim
 xinput-synaptics
+virtualbox
+virtualbox-dkms
 xserver-xorg-input-synaptics
 openjdk-8-jdk
 gnome-tweak-tool
