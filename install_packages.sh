@@ -9,6 +9,7 @@ PACKAGES="$(cat ${DIR}/default_packages.list)"
 ANDROID_STUDIO_PACKAGES="$(cat ${DIR}/android_studio.list)"
 TAR_PACKAGES="$(cat ${DIR}/tar_packages.list)"
 DEB_PACKAGES="$(cat ${DIR}/deb_packages.list)"
+NPM_PACKAGES="$(cat ${DIR}/npm_packages.list)"
 
 touch unsuccessful.log
 
@@ -24,6 +25,13 @@ while read -r line; do
     echo "Installing package $NAME"
     sudo apt-get install -y $NAME || echo "Package $NAME unsuccessful" >> unsuccessful.log
 done <<< "$ANDROID_STUDIO_PACKAGES"
+
+# Install npm packages
+while read -r line; do
+    NAME="$line"
+    echo "Installing $NAME"
+    npm install -g $NAME || echo "NPM Package $NAME unsuccessful" >> unsuccessful.log
+done <<< "$NPM_PACKAGES"
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
