@@ -1,8 +1,8 @@
 if pgrep imwheel > /dev/null
 then
-    echo "Running, disabing"
+    echo "[timwheel] Running, disabing"
     imwheel -q -k
 else
-    "Not running, starting"
+    "[timwheel] Not running, starting"
     imwheel -b "4 5"
 fi
