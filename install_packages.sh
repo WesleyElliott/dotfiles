@@ -6,10 +6,8 @@ sudo apt-get install curl # needed for some thirdparty apps
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DIR="${DIR}/packages"
 PACKAGES="$(cat ${DIR}/default_packages.list)"
-ANDROID_STUDIO_PACKAGES="$(cat ${DIR}/android_studio.list)"
-TAR_PACKAGES="$(cat ${DIR}/tar_packages.list)"
-DEB_PACKAGES="$(cat ${DIR}/deb_packages.list)"
 NPM_PACKAGES="$(cat ${DIR}/npm_packages.list)"
+DESKTOP_SESSION_PACKAGES="$(cat ${DIR}/${DESKTOP_SESSION}.list)"
 
 touch unsuccessful.log
 
@@ -19,19 +17,19 @@ while read -r line; do
     sudo apt-get install -y $NAME || echo "Package $NAME  unsuccessful" >> unsuccessful.log
 done <<< "$PACKAGES"
 
-# Install 32bit libs for Android Studio
-while read -r line; do
-    NAME="$line"
-    echo "Installing package $NAME"
-    sudo apt-get install -y $NAME || echo "Package $NAME unsuccessful" >> unsuccessful.log
-done <<< "$ANDROID_STUDIO_PACKAGES"
-
 # Install npm packages
 while read -r line; do
     NAME="$line"
     echo "Installing $NAME"
     npm install -g $NAME || echo "NPM Package $NAME unsuccessful" >> unsuccessful.log
 done <<< "$NPM_PACKAGES"
+
+# Install desktop session specific packages
+while read -r line; do
+    NAME="$line"
+    echo "Installing $DESKTOP_SESSION $NAME"
+    sudo apt-get install -y $NAME || echo "$DESKTOP_SESSION Package $NAME  unsuccessful" >> unsuccessful.log
+done <<< "$DESKTOP_SESSION_PACKAGES"
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
