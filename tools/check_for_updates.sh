@@ -1,26 +1,19 @@
-
-function get_current_branch {
-    local result=$( dotfiles rev-parse --abbrev-ref HEAD )
-    return $result
-}
+BRANCH=$( dotfiles rev-parse --abbrev-ref HEAD )
 
 function push_dotfiles {
-    local branch=$(get_current_branch)
-    dotfiles push origin $branch
+    dotfiles push origin $BRANCH
 }
 
 function pull_dotfiles {
-    local branch=$(get_current_branch)
-    dotfiles pull origin $branch
+    dotfiles pull origin $BRANCH
 }
 
 function check_remote {
-    local branch=$(get_current_branch)
     source $HOME/.functions
     source $HOME/.aliases
-    dotfiles fetch origin $branch
+    dotfiles fetch origin $BRANCH
 
-    local result=$( dotfiles_status $branch HEAD )    
+    local result=$( dotfiles_status $BRANCH HEAD )    
     return $result
 }
 
