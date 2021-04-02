@@ -1,6 +1,6 @@
 
 function get_current_branch {
-    return git rev-parse --abbrev-ref HEAD
+    return dotfiles rev-parse --abbrev-ref HEAD
 }
 
 function push_dotfiles {
@@ -20,6 +20,8 @@ function check_remote {
     
     return dotfiles_status $branch
 }
+
+source $HOME/.aliases
 
 check_remote
 if [ $? = 1 ]; then
