@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+
+# Calculates the diff status of a branch between the local and remote copies.
+#
+# Arguments:
+#   1   Branch name, defaults to "main"
+#   2   Remote prefix, defaults to "origin"
+#
+# Returns:
+#   0   if the working copies are the same, ie no updates - no changes to push
+#   1   if the local working copy is ahead of the remote, so a push should happen
+#   -1  if the local working copy is behind remote, so a pull should happen
+#   2   if the local copy is out of sync with the remote copy, merge conflic is going to happen...
+function dotfiles_status() {
+    local branch=${1:-main}
+    local remote=${2:-origin}
+    
+    echo "Checking branch: $branch against $remote"
+
+    local a="$branch" b="$remote/$branch"
+    local base=$( git merge-base $a $b )
+    local aref=$( git rev-parse $a )
+    local bref=$( git rev-parse $b )
+    
+    if [[ $aref == "$bref" ]]; then
+        # Up to date
+        return 0
+    elif [[ $aref == "$base" ]]; then
+        # Behind, should pull
+        return -1
+    elif [[ $bref == "$base" ]]; then
+        # Ahead, should push
+        return 1
+    else
+        # Diverged, need to push and pull. Conflicts...
+        return 2
+    fi
+}
