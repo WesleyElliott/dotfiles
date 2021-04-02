@@ -18,7 +18,7 @@ function check_remote {
     local branch=$(get_current_branch)
     source $HOME/.functions
     source $HOME/.aliases
-    dotfiles fetch
+    dotfiles fetch origin $branch
 
     local result=$( dotfiles_status $branch )    
     return $result
