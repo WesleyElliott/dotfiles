@@ -15,11 +15,13 @@ RESET=$(printf '\033[m')
 function push_dotfiles {
     printf "${BLUE}%s${RESET}\n" "Pushing..."
     dotfiles push origin $BRANCH --quiet
+    printf "${GREEN}${BOLD}%s${RESET}\n" "Push complete!"
 }
 
 function pull_dotfiles {
     printf "${BLUE}%s${RESET}\n" "Updating..."
     dotfiles pull origin $BRANCH --quiet
+    printf "${GREEN}${BOLD}%s${RESET}\n" "Update complete!"
 }
 
 function check_remote {
