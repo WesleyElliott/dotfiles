@@ -11,7 +11,7 @@ function pull_dotfiles {
 function check_remote {
     source $HOME/.functions
     source $HOME/.aliases
-    dotfiles fetch origin $BRANCH
+    dotfiles fetch origin $BRANCH --quiet
 
     local result=$( dotfiles_status $BRANCH HEAD )    
     return $result
