@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -selection clipboard -o"
+alias zshconfig="vim $HOME/.zshrc"
+
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
