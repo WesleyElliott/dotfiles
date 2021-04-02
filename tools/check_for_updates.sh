@@ -13,7 +13,7 @@ function check_remote {
     source $HOME/.aliases
     dotfiles fetch origin $BRANCH --quiet
 
-    dotfiles_status $BRANCH HEAD
+    dotfiles_status $BRANCH
     return $?
 }
 
