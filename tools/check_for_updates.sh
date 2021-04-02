@@ -1,6 +1,7 @@
 
 function get_current_branch {
-    return dotfiles rev-parse --abbrev-ref HEAD
+    local result=$( dotfiles rev-parse --abbrev-ref HEAD )
+    return $result
 }
 
 function push_dotfiles {
@@ -16,12 +17,13 @@ function pull_dotfiles {
 function check_remote {
     local branch=$(get_current_branch)
     source $HOME/.functions
+    source $HOME/.aliases
     dotfiles fetch
-    
-    return dotfiles_status $branch
+
+    local result=$( dotfiles_status $branch )    
+    return $result
 }
 
-source $HOME/.aliases
 
 check_remote
 if [ $? = 1 ]; then
