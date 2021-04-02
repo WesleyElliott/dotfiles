@@ -10,7 +10,7 @@ function push_dotfiles {
 
 function pull_dotfiles {
     local branch=$(get_current_branch)
-    dotfiles pull
+    dotfiles pull origin $branch
 }
 
 function check_remote {
