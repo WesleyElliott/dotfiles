@@ -13,13 +13,13 @@ UNDER=$(printf '\033[4m')
 RESET=$(printf '\033[m')
 
 function push_dotfiles {
-    printf "${BLUE}%s${RESET}\n" "Pushing..."
+    printf "\n${BLUE}%s${RESET}\n" "Pushing..."
     dotfiles push origin $BRANCH --quiet
     printf "${GREEN}${BOLD}%s${RESET}\n" "Push complete!"
 }
 
 function pull_dotfiles {
-    printf "${BLUE}%s${RESET}\n" "Updating..."
+    printf "\n${BLUE}%s${RESET}\n" "Updating..."
     dotfiles pull origin $BRANCH --quiet
     printf "${GREEN}${BOLD}%s${RESET}\n" "Update complete!"
 }
