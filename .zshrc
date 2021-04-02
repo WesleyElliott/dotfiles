@@ -9,7 +9,7 @@ source $ZSH/oh-my-zsh.sh
 # - .path for extending PATH
 # - .aliases for custom aliases
 # - .exports for custom exports
-for file in $HOME/.{path,aliases,exports}; do
+for file in $HOME/.{path,aliases,exports,functions}; do
     [ -r "$file" ] && [ -f "$file" ] && source $file;
 done;
 

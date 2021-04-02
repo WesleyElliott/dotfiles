@@ -18,9 +18,9 @@ function dotfiles_status() {
     echo "Checking branch: $branch against $remote"
 
     local a="$branch" b="$remote/$branch"
-    local base=$( git merge-base $a $b )
-    local aref=$( git rev-parse $a )
-    local bref=$( git rev-parse $b )
+    local base=$( dotfiles merge-base $a $b )
+    local aref=$( dotfiles rev-parse $a )
+    local bref=$( dotfiles rev-parse $b )
     
     if [[ $aref == "$bref" ]]; then
         # Up to date
