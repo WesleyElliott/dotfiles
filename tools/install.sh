@@ -36,7 +36,7 @@ setup_dotfiles() {
 
     mkdir -p .dotfiles-backup
     dotfiles checkout -f
-    dotfiles config --local --add remote.origin.fetch "+refs/heads/*:/refs/remotes/origin/*"
+    dotfiles config --local --add remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
     dotfiles fetch origin --quiet
     dotfiles branch -u origin/$BRANCH
     echo "${GREEN}Checked out dotfiles.${RESET}"
