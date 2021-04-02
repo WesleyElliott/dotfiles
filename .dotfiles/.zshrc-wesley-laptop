@@ -1,6 +1,0 @@
-export PATH=${PATH}:/home/wesley/Android/Sdk/platform-tools/:/opt/flutter/bin
-
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-
-

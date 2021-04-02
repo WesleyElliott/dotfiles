@@ -1,5 +1,0 @@
-export PATH=$PATH:~/Library/Android/sdk/platform-tools/:~/Developer/Scripts
-
-alias wassBuild='./gradlew :wass-common:clean :wass-common:assemble :contentprovider-client:clean :contentprovider-client:assemble :sdk-core:clean :sdk-core:assemble :sdk-android:clean :sdk-android:assemble'
-alias wassPubLocal='./gradlew :wass-common:publishToMavenLocal :contentprovider-client:publishToMavenLocal :sdk-core:publishToMavenLocal :sdk-android:publishToMavenLocal'
-alias wassPubMvn='./gradlew :wass-common:artifactPublish :contentprovider-client:artifactPublish :sdk-core:artifactPublish :sdk-android:artifactPublish'
