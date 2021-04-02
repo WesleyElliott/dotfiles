@@ -1,11 +1,12 @@
 BRANCH=$( dotfiles rev-parse --abbrev-ref HEAD )
+RESULT=0
 
 function push_dotfiles {
-    dotfiles push origin $BRANCH
+    dotfiles push origin $BRANCH --quiet
 }
 
 function pull_dotfiles {
-    dotfiles pull origin $BRANCH
+    dotfiles pull origin $BRANCH --quiet
 }
 
 function check_remote {
@@ -14,12 +15,14 @@ function check_remote {
     dotfiles fetch origin $BRANCH --quiet
 
     dotfiles_status $BRANCH
-    return $?
+    local result=$?
+    return $result
 }
 
 
 check_remote
-if [ $? = 1 ]; then
+RESULT=$?
+if [ $RESULT = 1 ]; then
     # We are ahead, so ask to push changes
     echo -n "[dotfiles] Unpushed changes found, push to origin? [Y/n]\n"
     read -r -k option
@@ -27,7 +30,7 @@ if [ $? = 1 ]; then
         [yY$'\n']) push_dotfiles ;;
         [nN]) echo "Not pushing.\n" ;;
     esac
-elif [ $? = -1 ]; then
+elif [ $RESULT = -1 ]; then
     # We are behind, so ask to pull and update
     echo -n "[dotfiles] Would you like to update? [Y/n]\n"
     read -r -k option
@@ -35,7 +38,7 @@ elif [ $? = -1 ]; then
         [yY$'\n']) pull_dotfiles ;;
         [nN]) echo "Not updating.\n" ;;
     esac
-elif [ $? = -2 ]; then
+elif [ $RESULT = -2 ]; then
     # We have diverged, inform of possible conflics
     echo -n "[dotfiles] Local and remote changes found, please deal with conflicts and update\n"
 fi
