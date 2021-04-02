@@ -20,7 +20,7 @@ function check_remote {
     source $HOME/.aliases
     dotfiles fetch origin $branch
 
-    local result=$( dotfiles_status $branch )    
+    local result=$( dotfiles_status $branch HEAD )    
     return $result
 }
 
