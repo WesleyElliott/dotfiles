@@ -5,3 +5,10 @@ alias pbpaste="xclip -selection clipboard -o"
 alias zshconfig="vim $HOME/.zshrc"
 
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+# Shortcuts
+alias dl="cd ~/Downloads"
+alias dv="cd ~/Developer"
+
+# Use neovim instead
+alias vim="nvim"
