@@ -14,6 +14,7 @@ Plugin 'scrooloose/nerdtree'
 
 " Status bar
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " End of plugins. All plugins should be above!
 call vundle#end()
