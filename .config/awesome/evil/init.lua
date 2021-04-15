@@ -1,0 +1,6 @@
+require("evil.battery")
+require("evil.network")
+require("evil.volume")
+require("evil.bluetooth")
+require("evil.brightness")
+require("evil.system")
