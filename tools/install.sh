@@ -4,7 +4,7 @@ set -e
 # Repository details
 
 REPO=${REPO:-WesleyElliott/dotfiles.git}
-REMOTE=${REMOTE:-https://github.com/${REPO}}
+REMOTE=${REMOTE:-git@github.com:${REPO}}
 
 # Default branch is main, but can be specified
 BRANCH=${BRANCH:-main}
