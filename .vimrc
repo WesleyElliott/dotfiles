@@ -30,6 +30,11 @@ nnoremap <M-S-Up> :m .-2<CR>==
 nnoremap <M-S-Down> :m .+1<CR>==
 inoremap <M-S-UP> <Esc>:m .-2<CR>==gi
 inoremap <M-S-Down> <Esc>:m .+1<CR>==gi
+" Use \1,2,3 for tab switching
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
 
 
 " General settings
@@ -46,6 +51,12 @@ syntax on
 set encoding=utf-8
 " Wrap git messages to 72 chars
 au Filetype gitcommit set tw=72
+" Dont show current mode, airline does this for us
+set noshowmode
+" Always show the tabline
+set showtabline=2
+set laststatus=2
+set nowrap
 
 " Airline config
 " --------------
