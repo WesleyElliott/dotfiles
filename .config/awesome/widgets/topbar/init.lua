@@ -26,6 +26,7 @@ end
 local launcher = require("widgets.topbar.launcher")
 local taglist = require("widgets.topbar.taglist")
 local create_layoutbox = require("widgets.topbar.layoutbox")
+local create_tasklist = require("widgets.topbar.tasklist")
 local systray = wibox.widget.systray()
 local clock = wibox.widget.textclock()
 clock.font = beautiful.fontfamily["normal"] .. " 12"
@@ -83,6 +84,11 @@ awful.screen.connect_for_each_screen(function(screen)
         {
             -- Left
             bar_taglist,
+            wibox.widget {
+                create_tasklist(screen),
+                left = 50,
+                widget = wibox.container.margin
+            },
             spacing = dpi(6),
             layout = wibox.layout.fixed.horizontal,
         },
