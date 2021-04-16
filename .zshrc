@@ -4,6 +4,7 @@ ZSH_THEME="ys"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+export IGNORE_UPDATE=false
 
 # Load the shell dotfiles:
 # - .path for extending PATH
