@@ -13,15 +13,21 @@ UNDER=$(printf '\033[4m')
 RESET=$(printf '\033[m')
 
 function push_dotfiles {
-    printf "\n${BLUE}%s${RESET}\n" "Pushing..."
-    dotfiles push origin $BRANCH --quiet
-    printf "${GREEN}${BOLD}%s${RESET}\n" "Push complete!"
+    printf "\n${BLUE}%s${RESET}\n" "[dotfiles] Pushing..."
+    if dotfiles push origin $BRANCH --quiet; then
+        printf "${GREEN}${BOLD}%s${RESET}\n" "[dotfiles] Push complete!"
+    else
+        printf "${RED}${BOLD}%s${RESET}\n" "[dotfiles] Push failed."
+    fi
 }
 
 function pull_dotfiles {
-    printf "\n${BLUE}%s${RESET}\n" "Updating..."
-    dotfiles pull origin $BRANCH --quiet
-    printf "${GREEN}${BOLD}%s${RESET}\n" "Update complete!"
+    printf "\n${BLUE}%s${RESET}\n" "[dotfiles] Updating..."
+    if dotfiles pull origin $BRANCH --quiet; then
+        printf "${GREEN}${BOLD}%s${RESET}\n" "[dotfiles] Update complete!"
+    else
+        printf "${RED}%s${RESET}\n" "[dotfiles] Pull failed."
+    fi
 }
 
 function check_remote {
@@ -34,17 +40,19 @@ function check_remote {
     return $result
 }
 
-
 check_remote
 RESULT=$?
+if [ "$IGNORE_UPDATE" = true ]; then
+    return
+fi
 
 if [ $RESULT = 1 ]; then
     # We are ahead, so ask to push changes
-    printf "${BLUE}%s${RESET}\n" "Push changes to origin? [Y/n]"
+    printf "${BLUE}%s${RESET}\n" "[dotfiles] Push changes to origin? [Y/n]"
     read -r -k option
     case "$option" in
         [yY$'\n']) push_dotfiles ;;
-        [nN]) echo "Not pushing.\n" ;;
+        [nN]) echo "[dotfiles] Not pushing.\n" ;;
     esac
 elif [ $RESULT = -1 ]; then
     # We are behind, so ask to pull and update
@@ -52,10 +60,9 @@ elif [ $RESULT = -1 ]; then
     read -r -k option
     case "$option" in
         [yY$'\n']) pull_dotfiles ;;
-        [nN]) echo "Not updating.\n" ;;
+        [nN]) echo "[dotfiles] Not updating.\n" ;;
     esac
 elif [ $RESULT = -2 ]; then
     # We have diverged, inform of possible conflics
     printf "${RED}%s${RESET}\n" "[dotfiles] Local and remote are out of sync. Fix conflicts..."
 fi
-
