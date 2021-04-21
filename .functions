@@ -14,12 +14,12 @@
 function dotfiles_status() {
     local branch=${1:-main}
     local remote=${2:-origin/$branch}
-    
+
     local a="$branch" b="$remote"
     local base=$( dotfiles merge-base $a $b )
     local aref=$( dotfiles rev-parse $a )
     local bref=$( dotfiles rev-parse $b )
-    
+
     if [[ $aref == "$bref" ]]; then
         # Up to date
         return 0
@@ -42,6 +42,11 @@ fd() {
 
 # Better dotfile diff using FZF
 dfd() {
-    preview="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME diff $@ --color=always -- {-1}"
-    dotfiles diff $@ --name-only | fzf -m --ansi --preview $preview
+    root=$(dotfiles rev-parse --show-toplevel)
+    if [ -n "$root" ]; then
+        pushd "$root" > /dev/null
+        preview="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME diff $@ --color=always -- {-1}"
+        dotfiles diff $@ --name-only | fzf -m --ansi --preview $preview
+        popd > /dev/null
+    fi
 }
