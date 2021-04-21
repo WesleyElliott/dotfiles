@@ -15,3 +15,5 @@ for file in $HOME/.{path,aliases,exports,functions}; do
 done;
 
 source $HOME/tools/check_for_updates.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
