@@ -34,3 +34,14 @@ function dotfiles_status() {
         return 2
     fi
 }
+# Better diff using FZF
+fd() {
+    preview="git diff $@ --color=always -- {-1}"
+    git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
+
+# Better dotfile diff using FZF
+dfd() {
+    preview="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME diff $@ --color=always -- {-1}"
+    dotfiles diff $@ --name-only | fzf -m --ansi --preview $preview
+}
