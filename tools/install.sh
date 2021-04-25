@@ -5,6 +5,7 @@ set -e
 
 REPO=${REPO:-WesleyElliott/dotfiles.git}
 REMOTE=${REMOTE:-git@github.com:${REPO}}
+READ_URL=${READ_URL:-https://github.com/${REPO}
 
 # Default branch is main, but can be specified
 BRANCH=${BRANCH:-main}
@@ -37,6 +38,10 @@ setup_dotfiles() {
     mkdir -p .dotfiles-backup
     dotfiles checkout -f
     dotfiles config --local --add remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+    # Set the main url to a the https READ_URL. This allows fetch/pull to happen without ssh-keys added (as its a public repo)
+    dotfiles config --local --replace-all remote.origin.url $READ_URL
+    # set the push url to the main ssh url (REMOTE). This allows pushing to require ssh-keys added for auth
+    dotfiles config --local --replace-all remote.origin.pushurl $REMOTE 
     dotfiles fetch origin --quiet
     dotfiles branch -u origin/$BRANCH
     echo "${GREEN}Checked out dotfiles.${RESET}"
