@@ -5,7 +5,7 @@ set -e
 
 REPO=${REPO:-WesleyElliott/dotfiles.git}
 REMOTE=${REMOTE:-git@github.com:${REPO}}
-READ_URL=${READ_URL:-https://github.com/${REPO}
+READ_URL=${READ_URL:-https://github.com/${REPO}}
 
 # Default branch is main, but can be specified
 BRANCH=${BRANCH:-main}
