@@ -1,6 +1,7 @@
 " Setup Vunlder - plugin managements
 set nocompatible
 filetype off
+syntax enable
 
 " Set runtime path to include Vundler and init
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -24,14 +25,25 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'rust-lang/rust.vim'
 
 " Plugin 'autozimu/languageclient-neovim'
-Plugin 'neoclide/coc.nvim'
+" Plugin 'neoclide/coc.nvim'
 
 " Ale
-Plugin 'dense-analysis/ale'
+" Plugin 'dense-analysis/ale'
 
 " End of plugins. All plugins should be above!
+
+" VimWiki
+Plugin 'vimwiki/vimwiki'
+
+" Startify
+Plugin 'mhinz/vim-startify'
+
+" Dracula
+Plugin 'dracula/vim', { 'name': 'dracula' }
+
 call vundle#end()
 filetype plugin indent on
+
 
 " Custom keybinds
 " ---------------
@@ -44,10 +56,10 @@ nnoremap <M-S-Down> :m .+1<CR>==
 inoremap <M-S-UP> <Esc>:m .-2<CR>==gi
 inoremap <M-S-Down> <Esc>:m .+1<CR>==gi
 " Use \1,2,3 for tab switching
-nnoremap <Leader>1 1gt
-nnoremap <Leader>2 2gt
-nnoremap <Leader>3 3gt
-nnoremap <Leader>4 4gt
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
 
 
 " General settings
@@ -70,7 +82,6 @@ set number
 " Visual autocomplete for commands menu (using Tab)
 set wildmenu
 " Enable syntax highlighting
-syntax enable
 set encoding=utf-8
 " Wrap git messages to 72 chars
 au Filetype gitcommit set tw=72
@@ -83,11 +94,12 @@ set nowrap
 
 set mouse=a
 
+set splitbelow
+
 " Airline config
 " --------------
-let g:airline_theme='solarized'
+let g:airline_theme='dracula'
 let g:airline_powerline_fonts=1
-let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter='unique_tail'
 let g:airline#extensions#tabline#buffer_nr_show=1
@@ -139,8 +151,9 @@ endfunction
 
 " Colors
 " ------
-set background=dark
-colorscheme solarized
+" set background=dark
+colorscheme dracula
+set termguicolors
 
 " Text and indentation
 " --------------------
@@ -162,9 +175,15 @@ set backspace=indent,eol,start
 " Custom startup
 " --------------
 
-" Start tree view if we open the directory
-if argc() == 1 && argv(0) == '.'
+" Start tree view if we open vim without args
+if argc() == 0 
     au VimEnter * NERDTree
     " Auto switch the editor pane
     au VimEnter * wincmd w
 endif
+
+" Startify
+" -------
+"
+"  This shows Startify if the last buffer is closed 
+autocmd BufDelete * if empty(filter(tabpagebuflist(), '!buflisted(v:val)')) | Startify | endif
