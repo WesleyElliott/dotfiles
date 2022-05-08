@@ -22,9 +22,15 @@ function push_dotfiles {
 }
 
 function pull_dotfiles {
+    OLD_VIMRC_ID=$(git rev-parse HEAD:/.vimrc)
     printf "\n${BLUE}%s${RESET}\n" "[dotfiles] Updating..."
     if dotfiles pull origin $BRANCH --quiet; then
         printf "${GREEN}${BOLD}%s${RESET}\n" "[dotfiles] Update complete!"
+        NEW_VIMRC_ID=$(git rev-parse HEAD:/.vimrc)
+        if [ $OLD_VIMRC_ID != $NEW_VIMRC_ID ]; then
+            # Vimrc was updated, run PluginInstall to make sure
+            vim +PluginInstall +qall
+        fi
     else
         printf "${RED}%s${RESET}\n" "[dotfiles] Pull failed."
     fi
