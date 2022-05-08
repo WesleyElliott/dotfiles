@@ -29,7 +29,7 @@ setup_dotfiles() {
 
     echo ".dotfiles" >> .gitignore
     SUCCESS=0
-    git clone --bare --quiet --branch "$BRANCH" "$REMOTE" "$HOME/.dotfiles" > /dev/null || SUCCESS=1
+    git clone --bare --quiet --branch "$BRANCH" "$READ_URL" "$HOME/.dotfiles" > /dev/null || SUCCESS=1
     if [ $SUCCESS = 1 ]; then
         printf "%sError: could not checkout dotfiles. Does .dotfiles exist already?%s\n" $BOLD$RED $RESET
         exit 1
